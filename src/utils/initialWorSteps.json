@@ -1,0 +1,27 @@
+{
+  "courtOutcome": {
+    "label": "Select Court Outcome",
+    "status": "",
+    "routeName": "wor-court-outcome"
+  },
+  "updateFilingInfo": {
+    "label": "Update filing Information",
+    "status": "",
+    "routeName": "wor-update-filing-info"
+  },
+  "rentBalance": {
+    "label": "Update and Confirm Rent Balance",
+    "status": "",
+    "routeName": "wor-uc-rent-balance"
+  },
+  "filing": {
+    "label": "WOR Filing",
+    "status": "",
+    "routeName": "wor-filing"
+  },
+  "signature": {
+    "label": "WOR Review and Sign",
+    "status": "",
+    "routeName": "wor-signature"
+  }
+}

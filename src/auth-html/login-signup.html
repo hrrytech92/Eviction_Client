@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>File Evictions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="//fonts.googleapis.com/css?family=Hind:300,400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://use.typekit.net/fiq0ywk.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://allyoucan.cloud/cdn/icofont/1.0.1/icofont.css"
+      integrity=""
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="https://se-assets.nyc3.digitaloceanspaces.com/favicon.svg"
+    />
+  </head>
+
+  <style>
+    body,
+    html {
+      font-family: "futura-pt", sans-serif;
+      height: 100%;
+    }
+
+    /* input:-internal-autofill-selected {
+      background-color: #fff !important;
+    } */
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px white inset !important;
+    }
+
+    .container-fluid {
+      background-color: #f9f9f9;
+    }
+
+    .auth-container {
+      min-height: 100vh;
+      align-items: center;
+      position: relative;
+    }
+
+    .header-link {
+      position: absolute;
+      top: 25px;
+      left: 32px;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 17px 34px;
+      border-radius: 0px 58px 58px 0px;
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+    }
+
+    .footer p {
+      font-size: 14px;
+      line-height: 22px;
+      font-family: "futura-pt", sans-serif;
+      letter-spacing: 0.04px;
+      color: #53809d;
+      margin-bottom: 0;
+    }
+
+    .footer a {
+      font-size: 14px;
+      line-height: 22px;
+      font-family: "futura-pt", sans-serif;
+      letter-spacing: 0.04px;
+      color: #4dccc4;
+      margin-left: 20px;
+    }
+
+    button:focus {
+      outline: none;
+    }
+
+    #auth-tabs {
+      margin-bottom: 35px;
+    }
+
+    #remember-me {
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+    }
+
+    #remember-me span {
+      color: #9aabb5;
+      font-size: 14px;
+      line-height: 22px;
+      font-family: "Open sans";
+      font-weight: 500;
+    }
+
+    #read-and-accept {
+      margin-bottom: 40px;
+      display: flex;
+    }
+
+    #read-and-accept div {
+      display: flex;
+    }
+
+    #read-and-accept span {
+      font-size: 14px;
+      line-height: 22px;
+      font-family: "FUTURA-PT";
+      letter-spacing: 0.98px;
+      color: #9aabb5;
+      text-transform: uppercase;
+      opacity: 1;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 3px;
+      text-decoration-color: rgb(77, 204, 196);
+      opacity: 1;
+    }
+
+    .sign-up-register {
+      text-align: left;
+      font-size: 14px;
+      line-height: 22px;
+      font-family: "FUTURA-PT";
+      letter-spacing: 0.98px;
+      color: #9aabb5;
+      opacity: 1;
+      padding: 5px 0;
+      margin-right: 25px;
+      font-weight: 500;
+    }
+
+    .sign-up-register:hover {
+      color: #9aabb5;
+    }
+
+    #login-togglePassword,
+    #signup-togglePassword {
+      all: unset;
+      text-align: right;
+      font-size: 12px;
+      line-height: 22px;
+      color: #8ba4b4;
+      letter-spacing: 0.84px;
+      right: 10px;
+      top: 8px;
+      z-index: 2;
+      cursor: pointer;
+      font-family: "Futura PT", sans-serif !important;
+      position: absolute;
+    }
+
+    input {
+      font-family: "Open Sans", sans-serif !important;
+      color: #9aabb5 !important;
+      font-size: 14px !important;
+      line-height: 19px !important;
+      opacity: 1; /* Firefox */
+      font-weight: lighter;
+      letter-spacing: 0.04px !important;
+    }
+
+    ::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #9aabb5 !important;
+      font-size: 14px !important;
+      line-height: 19px !important;
+      opacity: 1; /* Firefox */
+      font-weight: lighter;
+      letter-spacing: 0.04px !important;
+    }
+
+    input.error {
+      border: 2px solid #ff854e;
+    }
+
+    input:hover {
+      box-shadow: 15px 15px 40px #0000001f;
+    }
+
+    input:focus {
+      /* border: none; */
+      outline: none;
+      box-shadow: 15px 15px 40px #0000001f;
+      /* box-shadow: 15px 15px 40px #0000001F; */
+    }
+
+    #signup-password.error::placeholder {
+      color: #ff854e;
+    }
+
+    input:not(.error):focus {
+      /* box-shadow: 0 0 0 0 #fff, 0 0 0 3px #4DCCC4 !important; */
+      border: 2px solid #4dccc4 !important;
+      box-shadow: 15px 15px 40px #0000001f;
+    }
+
+    input:not(.error):focus + i {
+      color: #4dccc4;
+    }
+
+    input:not(.error):hover {
+      /* box-shadow: 0 0 0 0 #fff, 0 0 0 3px #4DCCC4 !important; */
+      border: 2px solid #4dccc4 !important;
+    }
+
+    input:not(.error):hover + i {
+      color: #4dccc4;
+    }
+
+    input.error + i {
+      color: #ff854e;
+    }
+
+    input.error:focus {
+      /* box-shadow: 0 0 0 0 #fff, 0 0 0 3px #FF854E !important; */
+      border: 2px solid #ff854e !important;
+      box-shadow: 15px 15px 40px #0000001f;
+    }
+
+    input.error:focus + i {
+      color: #ff854e;
+    }
+
+    input.error:hover {
+      border: 2px solid #ff854e !important;
+    }
+
+    *:focus {
+      outline: 0 !important;
+      /* box-shadow: 0 0 0 .2rem #fff, 0 0 0 .35rem #069 !important; */
+    }
+
+    *:focus:not(.focus-visible) {
+      outline: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .icofont-email {
+      font-family: "IcoFont", sans-serif;
+    }
+
+    #auth-box {
+      width: 375px;
+      padding: 62px 60px 40px;
+      background: #ffffff 0% 0% no-repeat padding-box;
+      box-shadow: 15px 15px 40px #0000001f;
+      border-radius: 20px;
+      opacity: 1;
+      position: relative;
+      transition: opacity 10.5s ease-in-out;
+      -webkit-transition: opacity 10.5s ease-in-out;
+      -moz-transition: opacity 10.5s ease-in-out;
+      -ms-transition: opacity 10.5s ease-in-out;
+      -o-transition: opacity 10.5s ease-in-out;
+    }
+
+    .login-header {
+      text-align: center;
+    }
+
+    .login-header img {
+      width: 75px;
+    }
+
+    .form-control {
+      background: #ffffff 0% 0% no-repeat padding-box;
+      border: 1px solid #afc2ce;
+      border-radius: 45px;
+      opacity: 1;
+      height: 33px;
+      position: relative;
+      padding: 0.375rem 0.75rem 0.375rem 2.5rem;
+    }
+
+    /* .form-group {
+      margin-bottom: 35px;
+    } */
+
+    .btn-block {
+      background: #4dccc4 0% 0% no-repeat padding-box;
+      padding: 7px;
+      width: 100%;
+      opacity: 1;
+      color: white;
+      font-size: 14px;
+      line-height: 24px;
+      font-family: "Open Sans";
+      text-transform: capitalize;
+      font-weight: 600;
+      border-radius: 30px;
+    }
+
+    .btn-block:hover {
+      color: white;
+    }
+
+    .btn-block:disabled {
+      background-color: #eee;
+      cursor: not-allowed;
+      color: rgba(0, 0, 0, 0.15);
+    }
+
+    #login-error-message,
+    #signup-error-message {
+      display: none;
+    }
+
+    .error-alert {
+      font-size: 14px;
+      line-height: 22px;
+      color: #ff854e;
+      text-align: center;
+      font-family: "Open Sans";
+      margin-bottom: 15px;
+    }
+
+    .dot {
+      z-index: 2;
+      margin-top: -119px;
+      margin-left: calc(50% - 119px);
+      width: 238px;
+      height: 238px;
+      background: #4dccc4 0% 0% no-repeat padding-box;
+      border-radius: 50%;
+      opacity: 1;
+      position: absolute;
+    }
+
+    .line {
+      z-index: 3;
+      margin-left: calc(50% - 70px);
+      width: 262px;
+      height: 308px;
+      transform: matrix(0.67, -0.74, 0.74, 0.67, 0, 0);
+      border-top: 3px solid #003a60;
+      opacity: 1;
+      position: absolute;
+    }
+
+    .input-container {
+      border-radius: 45px;
+      position: relative;
+    }
+
+    .input-container input {
+      flex-grow: 2;
+    }
+
+    #forgot-password-link {
+      width: 100%;
+      letter-spacing: 0.98px;
+      color: #9aabb5;
+      font-size: 14px;
+      line-height: 22px;
+      font-family: "FUTURA-PT";
+      margin-top: 15px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    #forgot-password-link:hover {
+      color: #4dccc4;
+    }
+
+    .read-accept-modal {
+      max-width: 700px;
+      overflow: hidden;
+    }
+
+    .read-accept-modal .modal-header {
+      padding: 20px 30px 0;
+      color: #003a60;
+    }
+
+    .read-accept-modal .modal-body {
+      /*
+       	padding: 0 30px;
+       	overflow-y: scroll;
+      */
+      height: 50vh;
+
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 1.25rem;
+    }
+
+    .read-accept-modal .modal-body::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #f5f5f5;
+      border-radius: 10px;
+    }
+
+    .read-accept-modal .modal-body::-webkit-scrollbar {
+      width: 6px;
+      background-color: #f5f5f5;
+      border-radius: 10px;
+    }
+
+    .read-accept-modal .modal-body::-webkit-scrollbar-thumb {
+      background-color: #4dccc4;
+      border-radius: 10px;
+    }
+
+    .read-accept-modal .modal-content {
+      border-radius: 20px;
+    }
+
+    .read-accept-modal .modal-footer {
+      background-color: #fafbfc;
+      border-radius: 0 0 20px 20px;
+      padding: 20px;
+    }
+
+    #decline-btn {
+      border: 3px solid #4dccc4;
+      border-radius: 45px;
+      background-color: transparent;
+      color: #4dccc4;
+      font-size: 18px;
+      line-height: 1;
+      font-family: "Open sans";
+      width: 140px;
+      height: 36px;
+    }
+
+    #accept-btn {
+      border-radius: 45px;
+      border: 3px solid #4dccc4;
+      background-color: #4dccc4;
+      color: white;
+      font-size: 18px;
+      font-family: "Open sans";
+      width: 140px;
+      height: 36px;
+      line-height: 1;
+    }
+
+    /* Switch styles */
+    input[type="checkbox"]#remember-me-checkbox {
+      height: 0;
+      width: 0;
+      visibility: hidden;
+    }
+
+    input[type="checkbox"]#read-accept-checkbox {
+      height: 0;
+      width: 0;
+      visibility: hidden;
+    }
+
+    label {
+      cursor: pointer;
+      text-indent: -9999px;
+      width: 50px;
+      height: 30px;
+      background: #eee;
+      display: block;
+      border-radius: 100px;
+      position: relative;
+      margin-left: 20px;
+      margin-bottom: 0;
+    }
+
+    label:after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50px;
+      background-color: white;
+      /* transition: 0.3s; */
+    }
+
+    input:checked + label {
+      background: #d2f2f0;
+    }
+
+    input:checked + label:after {
+      left: calc(100% - 3px);
+      transform: translateX(-100%);
+      background: #4dccc4;
+    }
+
+    ul {
+      text-align: left;
+    }
+
+    /* label:active:after {
+      width: 130px;
+    } */
+
+    #password-policy {
+      display: none;
+      color: #003a60;
+      position: relative;
+      margin-top: 10px;
+    }
+
+    #password-policy h6 {
+      font-family: "Open Sans";
+      font-size: 14px;
+      line-height: 22px;
+    }
+
+    #password-policy p {
+      padding: 5px 12px;
+      font-size: 14px;
+      line-height: 22px;
+      font-family: "Open Sans";
+      margin: 0;
+    }
+
+    /* Add a green text color and a checkmark when the requirements are right */
+    .valid {
+      color: #4dccc4;
+    }
+    .valid:before {
+      position: relative;
+      left: -11px;
+      content: "✔";
+    }
+
+    /* Add a red text color and an "x" when the requirements are wrong */
+    .invalid {
+      color: #ff854e;
+    }
+    .invalid:before {
+      position: relative;
+      left: -11px;
+      content: "✖";
+    }
+
+    #signup-form {
+      display: none;
+    }
+
+    .sign-up-register.active {
+      border-bottom: 3px solid #4dccc4;
+      border-radius: 0;
+      color: #4dccc4;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    .icofont-envelope {
+      position: absolute;
+      font-size: 20px;
+      color: #afc2ce;
+      z-index: 1;
+      top: 7px;
+      left: 12px;
+    }
+
+    .icofont-key {
+      position: absolute;
+      font-size: 20px;
+      color: #afc2ce;
+      z-index: 1;
+      top: 7px;
+      left: 12px;
+    }
+
+    /* Forgot Password Section */
+    #forgot-password {
+      display: none;
+    }
+
+    #forgot-password .image-section {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    #forgot-password .image-section img {
+      width: 65px;
+    }
+
+    #forgot-password h3 {
+      font-size: 25px;
+      line-height: 37px;
+      letter-spacing: 0.07px;
+      color: #003a60;
+      text-align: center;
+      margin-bottom: 29px;
+    }
+
+    #forgot-password p {
+      font-size: 14px;
+      line-height: 24px;
+      font-family: "Open Sans";
+      color: #003a60;
+      margin-bottom: 30px;
+    }
+
+    #forgot-password .link-groups {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 36px;
+      font-size: 14px;
+      line-height: 22px;
+      color: #9aabb5;
+      font-family: "FUTURA-PT";
+      font-weight: 600;
+    }
+
+    #forgot-password .link-groups .line-border {
+      margin: 0 20px;
+    }
+
+    #login-link,
+    #signup-link {
+      cursor: pointer;
+    }
+
+    #login-link:hover,
+    #signup-link:hover {
+      color: #4dccc4;
+    }
+
+    #unlock-icon {
+      position: absolute;
+      top: -22px;
+      font-size: 45px;
+      color: #4dccc4;
+      left: 25px;
+      display: none;
+    }
+
+    #forgot-password-error-message {
+      display: none;
+    }
+
+    #forgot-password-success-message {
+      display: none;
+      color: #4dccc4;
+      display: block;
+      font-size: 20px;
+      text-align: center;
+      font-family: "Open Sans";
+      margin-bottom: 15px;
+    }
+
+    #change-password-request-success {
+      display: none;
+    }
+
+    #change-password-request-success .image-section {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    #change-password-request-success .image-section img {
+      width: 65px;
+    }
+
+    #change-password-request-success h3 {
+      font-size: 25px;
+      line-height: 37px;
+      letter-spacing: 0.07px;
+      color: #003a60;
+      text-align: center;
+      margin-bottom: 29px;
+    }
+
+    #change-password-request-success p {
+      font-size: 14px;
+      line-height: 24px;
+      font-family: "Open Sans";
+      color: #003a60;
+      margin-bottom: 30px;
+    }
+  </style>
+
+  <body>
+    <div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 d-flex justify-content-center auth-container">
+            <a href="https://fileevictions.com" class="header-link">
+              <img
+                src="https://dashboard.fileevictions.com/images/logo.svg"
+                alt="logo"
+                height="50"
+              />
+            </a>
+            <div id="auth-box">
+              <!-- <i class="icofont-unlock forgot-password-icon" id="unlock-icon"></i>    			 -->
+              <div id="auth-login-signup">
+                <div id="auth-tabs">
+                  <button
+                    type="button"
+                    id="login-tab"
+                    class="btn btn-default sign-up-register active"
+                  >
+                    LOGIN
+                  </button>
+                  <button
+                    type="button"
+                    id="signup-tab"
+                    class="btn btn-default sign-up-register"
+                  >
+                    REGISTER
+                  </button>
+                </div>
+
+                <form id="login-form" onsubmit="return false;" method="post">
+                  <div class="form-group">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="login-email"
+                      placeholder="Email Address"
+                    />
+                    <i class="icofont-envelope"></i>
+                  </div>
+                  <div class="form-group input-container">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="login-password"
+                      placeholder="Password"
+                    />
+                    <i class="icofont-key"></i>
+                    <div id="login-togglePassword">SHOW</div>
+                  </div>
+                  <div id="login-error-message" class="error-alert"></div>
+                  <div id="remember-me">
+                    <span id="remember-me-text">Remember me</span>
+                    <input type="checkbox" id="remember-me-checkbox" /><label
+                      for="remember-me-checkbox"
+                      >Toggle</label
+                    >
+                  </div>
+                  <div class="actions">
+                    <button
+                      type="submit"
+                      id="login-submit"
+                      class="btn btn-block"
+                    >
+                      Access Account
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-default"
+                      id="forgot-password-link"
+                      data-toggle="modal"
+                      data-target="#passwordModal"
+                    >
+                      Forgot password
+                    </button>
+                  </div>
+                </form>
+
+                <form id="signup-form" onsubmit="return false;" method="post">
+                  <div class="form-group">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="signup-email"
+                      placeholder="Email Address"
+                    />
+                    <i class="icofont-envelope"></i>
+                  </div>
+                  <div class="form-group input-container">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="signup-password"
+                      placeholder="Password"
+                    />
+                    <i class="icofont-key"></i>
+                    <div id="signup-togglePassword">SHOW</div>
+                  </div>
+                  <div id="password-policy">
+                    <h6>
+                      Your password must contain each of the requirements listed
+                      below.
+                    </h6>
+                    <p id="length" class="invalid">At least 8 characters</p>
+                    <p id="capital" class="invalid">
+                      At least 1 uppercase letter (A-Z)
+                    </p>
+                    <p id="letter" class="invalid">
+                      At least 1 lowercase letter (a-z)
+                    </p>
+                    <p id="number" class="invalid">At least 1 number</p>
+                  </div>
+                  <div id="signup-error-message" class="error-alert"></div>
+                  <div id="read-and-accept">
+                    <span id="read-and-accept-text">READ AND ACCEPT</span>
+                    <div data-toggle="modal" data-target="#readacceptModal">
+                      <input
+                        type="checkbox"
+                        id="read-accept-checkbox"
+                        onClick="return false;"
+                      /><label for="read-accept-checkbox">Toggle</label>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <button
+                      type="submit"
+                      id="signup-submit"
+                      class="btn btn-block"
+                      disabled
+                    >
+                      Create Account
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div id="forgot-password">
+                <div class="image-section">
+                  <img
+                    src="https://fileevictions.com/wp-content/uploads/2021/06/lock.png"
+                    alt=""
+                  />
+                </div>
+                <h3>Forgot Password?</h3>
+                <p>
+                  It’s okay! It happens. Enter the email address associated with
+                  your account. We’ll send you an email with instructions to
+                  reset it.
+                </p>
+                <form
+                  id="forgot-password-form"
+                  onsubmit="return false;"
+                  method="post"
+                >
+                  <div class="form-group">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="forgot-password-email"
+                      placeholder="Email Address"
+                    />
+                    <i class="icofont-envelope"></i>
+                  </div>
+                  <div id="forgot-password-success-message"></div>
+                  <div
+                    id="forgot-password-error-message"
+                    class="error-alert"
+                  ></div>
+                  <div class="actions">
+                    <button
+                      type="submit"
+                      id="forgot-password-submit"
+                      class="btn btn-block"
+                    >
+                      Send Request
+                    </button>
+                  </div>
+                </form>
+                <div class="link-groups">
+                  <div id="login-link">LOGIN</div>
+                  <div class="line-border">|</div>
+                  <div id="signup-link">REGISTER</div>
+                </div>
+              </div>
+              <div id="change-password-request-success">
+                <div class="image-section">
+                  <img
+                    src="https://fileevictions.com/wp-content/uploads/2021/06/lock.png"
+                    alt=""
+                  />
+                </div>
+                <h3>Check Your Email</h3>
+                <p>
+                  We have sent instructions on how to change your password to
+                  the email address you provided.
+                </p>
+                <div class="actions">
+                  <button id="return-login" class="btn btn-block">
+                    Return to Login
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="footer">
+              <p>
+                ©<span id="year"></span> FileEvictions. All Rights Reserved.
+              </p>
+              <a
+                href="https://fileevictions.com/privacy-policy/"
+                target="_blank"
+                >Privacy Policy</a
+              >
+              <a
+                href="https://dashboard.fileevictions.com/terms"
+                target="_blank"
+                >Terms of Service</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Read and Accept Modal -->
+    <div class="modal fade" id="readacceptModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered read-accept-modal">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h1>Terms of Service</h1>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <i class="icofont-close"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <iframe
+              style="width: 100%; height: 100%"
+              src="https://dashboard.fileevictions.com/terms_auth0_iframe.html"
+              frameborder="0"
+            ></iframe>
+          </div>
+          <div class="modal-footer border-0">
+            <button
+              type="button"
+              class="btn"
+              id="decline-btn"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              Decline
+            </button>
+            <button
+              type="button"
+              class="btn"
+              id="accept-btn"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              Accept
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--[if IE 8]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/ie8/0.2.5/ie8.js"></script>
+    <![endif]-->
+
+    <!--[if lte IE 9]>
+      <script src="https://cdn.auth0.com/js/polyfills/1.0/base64.min.js"></script>
+      <script src="https://cdn.auth0.com/js/polyfills/1.0/es5-shim.min.js"></script>
+    <![endif]-->
+    <script src="https://cdn.auth0.com/js/auth0/9.13/auth0.min.js"></script>
+    <script src="https://cdn.auth0.com/js/polyfills/1.0/object-assign.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      document.getElementById("year").innerHTML = new Date().getFullYear();
+      $(document).ready(function () {
+        var currentUrl = window.location.href;
+        var url = new URL(currentUrl);
+        var currentTab = url.searchParams.get("screen_hint");
+        //console.log('currentTab', currentTab);
+
+        // Auth Settings
+        var config = JSON.parse(
+          decodeURIComponent(escape(window.atob("@@config@@")))
+        );
+
+        console.log({ config });
+
+        var params = Object.assign(
+          {
+            overrides: {
+              __tenant: config.auth0Tenant,
+              __token_issuer: "auth.easyevictionsnj.com",
+            },
+            domain: config.auth0Domain,
+            clientID: config.clientID,
+            redirectUri: config.callbackURL,
+            responseType: "code",
+          },
+          config.internalOptions
+        );
+
+        var mode = config.extraParams.mode || "login";
+
+        var webAuth = new auth0.WebAuth(params);
+
+        var databaseConnection = "Username-Password-Authentication";
+
+        if (currentTab === "signup") {
+          $("#login-form").hide();
+          $("#signup-form").show();
+          $("#signup-tab").addClass("active");
+          $("#login-tab").removeClass("active");
+          $("#read-accept-checkbox").prop("checked", false);
+          $("#signup-submit").prop("disabled", true);
+          $("#signup-error-message").hide();
+          $("#signup-email").removeClass("error");
+          $("#signup-password").removeClass("error");
+          $("#signup-password").attr("type", "password");
+          $("#unlock-icon").hide();
+        }
+
+        if (currentTab === "login") {
+          $("#signup-form").hide();
+          $("#login-form").show();
+          $("#login-tab").addClass("active");
+          $("#signup-tab").removeClass("active");
+          $("#login-error-message").hide();
+          $("#login-email").removeClass("error");
+          $("#login-password").removeClass("error");
+          $("#login-password").attr("type", "password");
+          $("#unlock-icon").hide();
+        }
+
+        // Hide the Login form and show the Signup form
+        $("#signup-tab").click(function () {
+          $("#login-form").hide();
+          $("#signup-form").show();
+          $(this).addClass("active");
+          $("#login-tab").removeClass("active");
+          $("#read-accept-checkbox").prop("checked", false);
+          $("#signup-submit").prop("disabled", true);
+          $("#signup-error-message").hide();
+          $("#signup-email").removeClass("error");
+          $("#signup-password").removeClass("error");
+          $("#signup-password").attr("type", "password");
+          $("#unlock-icon").hide();
+        });
+
+        // Hide the signup form and show the Login form
+        $("#login-tab").click(function () {
+          $("#signup-form").hide();
+          $("#login-form").show();
+          $(this).addClass("active");
+          $("#signup-tab").removeClass("active");
+          $("#login-error-message").hide();
+          $("#login-email").removeClass("error");
+          $("#login-password").removeClass("error");
+          $("#login-password").attr("type", "password");
+          $("#unlock-icon").hide();
+        });
+
+        // Handle focus and blur event for the login email input
+        $("#login-email").blur(function () {
+          const email = document.getElementById("login-email").value;
+          const re =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if (email === "") {
+            displayLoginError("email_empty");
+          } else if (re.test(String(email).toLowerCase())) {
+            if (this.classList.contains("error")) {
+              this.classList.remove("error");
+            }
+            displayLoginError("no_error");
+          } else if (!re.test(String(email).toLowerCase())) {
+            if (!this.classList.contains("error")) {
+              this.classList.add("error");
+            }
+            displayLoginError("invalid_email");
+          }
+        });
+
+        // Handle Login Sumbit
+        $("#login-submit").click(function () {
+          var username = document.getElementById("login-email").value;
+          var password = document.getElementById("login-password").value;
+
+          if (username == "" && password == "") {
+            displayLoginError("both_empty");
+            return;
+          } else if (username == "" && password !== "") {
+            displayLoginError("email_empty");
+            return;
+          } else if (username !== "" && password == "") {
+            displayLoginError("password_empty");
+            return;
+          }
+
+          const re =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if (!re.test(username)) {
+            displayLoginError("invalid_email");
+            return;
+          }
+
+          webAuth.login(
+            {
+              realm: databaseConnection,
+              username: username,
+              password: password,
+            },
+            function (err) {
+              if (err) displayLoginError(err);
+            }
+          );
+        });
+
+        // Display the error messages for submitting login
+        function displayLoginError(err) {
+          var errorMessage = document.getElementById("login-error-message");
+          var passwordInput = document.getElementById("login-password");
+          var emailInput = document.getElementById("login-email");
+
+          if (err.code === "invalid_signup") {
+            errorMessage.innerHTML = "The email already exists.";
+            emailInput.classList.add("error");
+          } else if (err === "both_empty") {
+            errorMessage.innerHTML =
+              "The email and password should not be empty";
+            emailInput.classList.add("error");
+            passwordInput.classList.add("error");
+          } else if (err === "email_empty") {
+            errorMessage.innerHTML = "The email should not be empty";
+            emailInput.classList.add("error");
+          } else if (err === "password_empty") {
+            errorMessage.innerHTML = "The password should not be empty";
+            passwordInput.classList.add("error");
+          } else if (err === "invalid_email") {
+            errorMessage.innerHTML = "The email is not valid.";
+            emailInput.classList.add("error");
+          } else if (err === "no_error") {
+            errorMessage.innerHTML = "";
+          } else if (err.code === "invalid_user_password") {
+            errorMessage.innerHTML = err.description;
+            emailInput.classList.add("error");
+            passwordInput.classList.add("error");
+          }
+          errorMessage.style.display = "block";
+        }
+
+        // Toggle password for the login and signup password input
+        $("#login-togglePassword").click(function () {
+          let type = $("#login-password").attr("type");
+          if (type == "password") {
+            $("#login-password").attr("type", "text");
+          } else {
+            $("#login-password").attr("type", "password");
+          }
+        });
+
+        $("#signup-togglePassword").click(function () {
+          let type = $("#signup-password").attr("type");
+          if (type == "password") {
+            $("#signup-password").attr("type", "text");
+          } else {
+            $("#signup-password").attr("type", "password");
+          }
+        });
+
+        // Handle checkbox for the "Read and Accept"
+        $("#decline-btn").click(function () {
+          $("#read-accept-checkbox").prop("checked", false);
+          $("#signup-submit").prop("disabled", true);
+        });
+
+        $("#accept-btn").click(function () {
+          $("#read-accept-checkbox").prop("checked", true);
+          $("#signup-submit").prop("disabled", false);
+        });
+
+        // Validate password for signup
+        $("#signup-password").keyup(function () {
+          validatePassword();
+        });
+
+        function validatePassword() {
+          var passwordInput = document.getElementById("signup-password");
+          var letter = document.getElementById("letter");
+          var capital = document.getElementById("capital");
+          var number = document.getElementById("number");
+          var length = document.getElementById("length");
+
+          document.getElementById("password-policy").style.display = "block";
+
+          var lowerCaseLetters = /[a-z]/g;
+          if (passwordInput.value.match(lowerCaseLetters)) {
+            letter.classList.remove("invalid");
+            letter.classList.add("valid");
+          } else {
+            letter.classList.remove("valid");
+            letter.classList.add("invalid");
+          }
+
+          // Validate capital letters
+          var upperCaseLetters = /[A-Z]/g;
+          if (passwordInput.value.match(upperCaseLetters)) {
+            capital.classList.remove("invalid");
+            capital.classList.add("valid");
+          } else {
+            capital.classList.remove("valid");
+            capital.classList.add("invalid");
+          }
+
+          // Validate numbers
+          var numbers = /[0-9]/g;
+          if (passwordInput.value.match(numbers)) {
+            number.classList.remove("invalid");
+            number.classList.add("valid");
+          } else {
+            number.classList.remove("valid");
+            number.classList.add("invalid");
+          }
+
+          // Validate length
+          if (passwordInput.value.length >= 8) {
+            length.classList.remove("invalid");
+            length.classList.add("valid");
+          } else {
+            length.classList.remove("valid");
+            length.classList.add("invalid");
+          }
+        }
+
+        // Input blur for the signup email and password
+        $("#signup-email").blur(function () {
+          const email = document.getElementById("signup-email").value;
+          const re =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if (email === "") {
+            displaySignupError("email_empty");
+          } else if (re.test(String(email).toLowerCase())) {
+            if (this.classList.contains("error")) {
+              this.classList.remove("error");
+            }
+            displaySignupError("no_error");
+          } else if (!re.test(String(email).toLowerCase())) {
+            if (!this.classList.contains("error")) {
+              this.classList.add("error");
+            }
+            displaySignupError("invalid_email");
+          }
+        });
+
+        // When the user clicks outside of the password field, hide the message box
+        $("#signup-password").blur(function () {
+          const password = document.getElementById("signup-password").value;
+          let passwordChecker = new RegExp(
+            "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})"
+          );
+          if (passwordChecker.test(password)) {
+            if (this.classList.contains("error")) {
+              this.classList.remove("error");
+            }
+            document.getElementById("password-policy").style.display = "none";
+          } else {
+            if (!this.classList.contains("error")) {
+              this.classList.add("error");
+            }
+            document.getElementById("password-policy").style.display = "block";
+          }
+        });
+
+        // Handle Signup Submit
+        $("#signup-submit").click(function () {
+          var email = document.getElementById("signup-email").value;
+          var password = document.getElementById("signup-password").value;
+
+          document.getElementById("signup-password").onfocus = function () {
+            document.getElementById("password-policy").style.display = "block";
+          };
+
+          if (email == "" && password == "") {
+            displaySignupError("both_empty");
+            return;
+          } else if (email == "" && password !== "") {
+            displaySignupError("email_empty");
+            return;
+          } else if (email !== "" && password == "") {
+            document.getElementById("password-policy").style.display = "block";
+            return;
+          }
+
+          let passwordChecker = new RegExp(
+            "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})"
+          );
+          if (!passwordChecker.test(password)) {
+            document.getElementById("password-policy").style.display = "block";
+            return;
+          }
+
+          const re =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if (!re.test(email)) {
+            displaySignupError("invalid_email");
+            return;
+          }
+
+          webAuth.redirect.signupAndLogin(
+            {
+              connection: databaseConnection,
+              email: email,
+              password: password,
+              name: " ",
+            },
+            function (err, resp) {
+              if (err) displaySignupError(err, "auth");
+            }
+          );
+        });
+
+        // Display error messages for submitting signup
+        function displaySignupError(err) {
+          var errorMessage = document.getElementById("signup-error-message");
+          var passwordInput = document.getElementById("signup-password");
+          var emailInput = document.getElementById("signup-email");
+
+          if (err.code === "invalid_signup") {
+            errorMessage.innerHTML = "The email already exists.";
+            emailInput.classList.add("error");
+          } else if (err === "both_empty") {
+            errorMessage.innerHTML =
+              "The email and password should not be empty";
+            emailInput.classList.add("error");
+            passwordInput.classList.add("error");
+          } else if (err === "email_empty") {
+            errorMessage.innerHTML = "The email should not be empty";
+            emailInput.classList.add("error");
+          } else if (err === "password_empty") {
+            errorMessage.innerHTML = "The password should not be empty";
+            passwordInput.classList.add("error");
+          } else if (err === "invalid_email") {
+            errorMessage.innerHTML = "The email is not valid.";
+            emailInput.classList.add("error");
+          } else if (err === "no_error") {
+            errorMessage.innerHTML = "";
+          } else if (err.code === "invalid_user_password") {
+            errorMessage.innerHTML = err.description;
+            emailInput.classList.add("error");
+            passwordInput.classList.add("error");
+          }
+          errorMessage.style.display = "block";
+        }
+
+        // Show Forgot Password section and hide login & signup sections
+        $("#forgot-password-link").click(function () {
+          $("#auth-login-signup").hide();
+          $("#forgot-password").show();
+          $("#unlock-icon").show();
+          $("#forgot-password-email").removeClass("error");
+          $("#forgot-password-success-message").hide();
+          $("#forgot-password-error-message").hide();
+        });
+
+        // Show Login Section
+        $("#login-link").click(function () {
+          $("#forgot-password").hide();
+          $("#auth-login-signup").show();
+          $("#signup-form").hide();
+          $("#login-form").show();
+          $("#login-tab").addClass("active");
+          $("#signup-tab").removeClass("active");
+          $("#login-error-message").hide();
+          $("#login-email").removeClass("error");
+          $("#login-password").removeClass("error");
+          $("#login-password").attr("type", "password");
+          $("#unlock-icon").hide();
+        });
+
+        // Show Signup Section
+        $("#signup-link").click(function () {
+          $("#forgot-password").hide();
+          $("#auth-login-signup").show();
+          $("#login-form").hide();
+          $("#signup-form").show();
+          $("#signup-tab").addClass("active");
+          $("#login-tab").removeClass("active");
+          $("#read-accept-checkbox").prop("checked", false);
+          $("#signup-submit").prop("disabled", true);
+          $("#signup-error-message").hide();
+          $("#signup-email").removeClass("error");
+          $("#signup-password").removeClass("error");
+          $("#signup-password").attr("type", "password");
+          $("#unlock-icon").hide();
+        });
+
+        // Handle focus and blur event for the login email input
+        $("#forgot-password-email").blur(function () {
+          const email = document.getElementById("forgot-password-email").value;
+          const re =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if (email === "") {
+            displayForgotPasswordError("email_empty");
+          } else if (re.test(String(email).toLowerCase())) {
+            if (this.classList.contains("error")) {
+              this.classList.remove("error");
+            }
+          } else if (!re.test(String(email).toLowerCase())) {
+            if (!this.classList.contains("error")) {
+              this.classList.add("error");
+            }
+            displayForgotPasswordError("invalid_email");
+          }
+        });
+
+        // Handle Forgot Password Sumbit
+        $("#forgot-password-submit").click(function () {
+          var email = document.getElementById("forgot-password-email").value;
+
+          if (email == "") {
+            displayForgotPasswordError("email_empty");
+            return;
+          }
+
+          const re =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if (!re.test(email)) {
+            displayForgotPasswordError("invalid_email");
+            return;
+          }
+
+          webAuth.changePassword(
+            {
+              connection: databaseConnection,
+              email: email,
+            },
+            function (err, resp) {
+              if (err) displayForgotPasswordError(err);
+              else {
+                $("#forgot-password").hide();
+                $("#change-password-request-success").show();
+                $("#forgot-password-error-message").hide();
+              }
+            }
+          );
+        });
+
+        $("#return-login").click(function () {
+          $("#change-password-request-success").hide();
+          $("#auth-login-signup").show();
+          $("#login-form").show();
+          $("#signup-form").hide();
+        });
+
+        // Display the error messages for submitting forgot-password
+        function displayForgotPasswordError(err) {
+          var errorMessage = document.getElementById(
+            "forgot-password-error-message"
+          );
+          var emailInput = document.getElementById("forgot-password-email");
+
+          if (err === "email_empty") {
+            errorMessage.innerHTML = "The email should not be empty.";
+            emailInput.classList.add("error");
+          } else if (err === "invalid_email") {
+            errorMessage.innerHTML = "The email is not valid.";
+            emailInput.classList.add("error");
+          }
+          errorMessage.style.display = "block";
+        }
+      });
+    </script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.js?features=Element.prototype.classList"></script>
+    <script src="https://unpkg.com/focus-visible"></script>
+  </body>
+</html>

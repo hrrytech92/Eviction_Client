@@ -1,0 +1,37 @@
+module.exports = {
+  root: true,
+  env: {
+    node: true,
+    browser: true,
+  },
+  extends: [
+    "plugin:vue/essential",
+    "eslint:recommended",
+    "@vue/standard",
+    "@vue/prettier",
+  ],
+  parserOptions: {
+    parser: "babel-eslint",
+  },
+  rules: {
+    "vue/no-v-html": 0,
+    indent: "off",
+    // indent: ["warn", 2, { SwitchCase: 1 }],
+    "no-console": process.env.NODE_ENV === "production" ? "off" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "off" : "off",
+    "array-callback-return": "off",
+    "no-throw-literal": "warn",
+    "no-unreachable": "off",
+    "object-curly-spacing": [2, "always"],
+    "vue/max-attributes-per-line": "off",
+    "vue/html-self-closing": "off",
+    eqeqeq: "off",
+    camelcase: "off",
+    "no-unused-expressions": "warn",
+    "no-unused-vars": "warn",
+    "spaced-comment": "off",
+    "no-useless-return": "off",
+    "import/no-absolute-path": "off",
+    "no-async-promise-executor": "off",
+  },
+};

@@ -1,0 +1,24 @@
+.uploaded-file-icon {
+  color: #afc2ce;
+  cursor: pointer;
+
+  &:hover {
+    color: #4dccc4 !important;
+  }
+}
+
+.font-bold {
+  font-weight: bold !important;
+}
+
+.w-full {
+  width: 100% !important;
+}
+
+.h-full {
+  height: 100% !important;
+}
+
+.text-field-center input {
+  text-align: center;
+}

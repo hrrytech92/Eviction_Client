@@ -1,0 +1,105 @@
+{
+  "property": {
+    "label": "Property",
+    "status": "",
+    "routeName": "select-property",
+    "showChildren": false,
+    "children": {
+      "type": {
+        "label": "Property Type",
+        "status": "",
+        "routeName": "vc-property-type"
+      },
+      "address": {
+        "label": "Property Address",
+        "status": "",
+        "routeName": "vc-property-address"
+      },
+      "owner": {
+        "label": "Deed Information",
+        "status": "",
+        "routeName": "vc-property-owner"
+      },
+      "associationToOwner": {
+        "label": "Association to Owner",
+        "status": "",
+        "routeName": "vc-property-association-to-owner"
+      },
+      "contact": {
+        "label": "Contact Information",
+        "status": "",
+        "routeName": "vc-client-contact"
+      }
+    }
+  },
+  "tenant": {
+    "label": "Tenant Information",
+    "status": "",
+    "routeName": "vc-tenants"
+  },
+  "leaseDetails": {
+    "label": "Lease Details",
+    "status": "",
+    "routeName": "vc-lease-details"
+  },
+  "pastDueRent": {
+    "label": "Past Due Rent",
+    "status": "",
+    "routeName": "vc-past-due-rent"
+  },
+  "additionalCharges": {
+    "label": "Additional Charges",
+    "status": "",
+    "routeName": "vc-additional-charges"
+  },
+  "legalFees": {
+    "label": "Legal Fees",
+    "status": "",
+    "routeName": "vc-legal-fees"
+  },
+  "confirmation": {
+    "label": "Confirmation",
+    "status": "",
+    "routeName": "vc-confirmation"
+  },
+  "verification": {
+    "label": "Verification",
+    "status": "",
+    "routeName": "vc-verification"
+  },
+  "certification": {
+    "label": "Certification",
+    "status": "",
+    "routeName": "vc-certification"
+  },
+  "lease": {
+    "label": "Lease",
+    "status": "",
+    "routeName": "vc-lease"
+  },
+  "registration": {
+    "label": "Registration",
+    "status": "",
+    "routeName": "vc-registration"
+  },
+  "suitSummary": {
+    "label": "Summary of Suit Amount",
+    "status": "",
+    "routeName": "vc-suit-summary"
+  },
+  "filingPlan": {
+    "label": "Filing",
+    "status": "",
+    "routeName": "vc-filing"
+  },
+  "sign": {
+    "label": "Review & Sign",
+    "status": "",
+    "routeName": "vc-signature"
+  },
+  "verifiedComplaintComplete": {
+    "label": "Verified Complaint Complete",
+    "status": "",
+    "hide": true
+  }
+}

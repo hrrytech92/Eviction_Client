@@ -1,0 +1,15 @@
+@import '~vuetify/src/styles/styles.sass'
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap')
+@import url("https://use.typekit.net/gys4uat.css")
+
+$body-font-family: "futura-pt"
+$typoOptions: display-4 display-3 display-2 display-1 headline title subtitle-1 subtitle-2 body-1 body-2 caption overline
+%font-choice
+  font-family: $body-font-family, sans-serif !important
+@mixin md-typography
+  @each $typoOption in $typoOptions
+    .#{$typoOption}
+      @extend %font-choice
+.v-application
+  @extend %font-choice
+  @include md-typography
